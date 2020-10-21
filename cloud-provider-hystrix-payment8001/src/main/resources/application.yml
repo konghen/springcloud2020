@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: cloud-payment-service
+    name: cloud-hystrix-payment-service
   datasource:
     # 当前数据源操作类型
     type: com.alibaba.druid.pool.DruidDataSource
@@ -34,7 +34,7 @@ eureka:
       defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka, http://eureka7003.com:7003/eureka
   instance:
     #在eureka服务端中显示的名字
-    instance-id: payment8001
+    instance-id: hystrix8001
     #在eureka服务端中，鼠标放在实例名称上，会显示ip
     prefer-ip-address: true
     #eureka客户端向服务端发送心跳的时间间割

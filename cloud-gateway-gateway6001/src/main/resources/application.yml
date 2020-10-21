@@ -1,0 +1,31 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: payment_routh
+#          uri: http://localhost:8001
+          uri: lb://CLOUD-PAYMENT-SERVICE
+          predicates:
+            - Path=/payment/get/**
+            - After=2020-10-20T16:16:16.345+08:00[Asia/Shanghai]
+      discovery:
+        locator:
+          #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+          enabled: true
+
+eureka:
+  client:
+    #表示将自己注册进eurekaServer
+    register-with-eureka: true
+    #从eurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true，才能配合ribbon使用负载均衡
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka, http://eureka7003.com:7003/eureka
+  instance:
+    instance-id: gateway6001
+    prefer-ip-address: true

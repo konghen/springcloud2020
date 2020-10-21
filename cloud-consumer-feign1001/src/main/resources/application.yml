@@ -1,0 +1,28 @@
+server:
+  port: 1001
+
+eureka:
+  client:
+    #表示将自己注册进eurekaServer
+    register-with-eureka: true
+    #从eurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true，才能配合ribbon使用负载均衡
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka, http://eureka7003.com:7003/eureka
+  instance:
+    instance-id: consumer1001
+    prefer-ip-address: true
+
+ribbon:
+  #与服务端建立连接的超时时间，与网络有关
+  ConnectTimeout: 1000
+  #建立连接后，从服务端获取数据的超时时间
+  ReadTimeout: 8000
+
+# NONE 默认，不显示日志信息
+# BASIC 只记录请求方法、url、响应状态码及执行时间
+# HEADERS 除了basic中定义的信息外，还有请求和响应的头信息
+# FULL 除了headers中定义的信息外，还有请求和响应的正文及元数据
+logging:
+  level:
+    com.atguigu.springcloud.service.PaymentFeignService: debug
